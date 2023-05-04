@@ -1,19 +1,18 @@
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, Pressable } from 'react-native';
 import { Text, View } from '../components/Themed';
-import tweets from '../assets/data/tweets';
 import { TweetType } from '../types';
 import { Entypo, Feather } from '@expo/vector-icons';
 import IconButton from './IconButton';
+import { Link } from 'expo-router';
 
 type TweetProps = {
     tweet: TweetType
 }
 
-const tweet = tweets[0];
-
 export default function Tweet({tweet}:TweetProps) {
   return (
-    <View style={styles.container}>
+    <Link href={`/tweet/${tweet.id}`} asChild>
+    <Pressable style={styles.container}> 
       <Image source={{uri:tweet.user.image}} style={styles.userImage}/>
       <View style={styles.usernameContainer}>
             <View style={{flexDirection: 'row'}}>
@@ -26,14 +25,15 @@ export default function Tweet({tweet}:TweetProps) {
             <Image source={{uri: tweet.image}} style={styles.tweetImage}/>
         }
         <View style={styles.footer}>
-        <IconButton icon="comment" text={tweet.numberOfComments}/>
-        <IconButton icon='retweet' text={tweet.numberOfRetweets} />
-        <IconButton icon='heart' text={tweet.numberOfLikes} />
-        <IconButton icon='chart' text={tweet.impressions || 0} />
-        <IconButton icon='share-apple'/>
+            <IconButton icon="comment" text={tweet.numberOfComments}/>
+            <IconButton icon='retweet' text={tweet.numberOfRetweets} />
+            <IconButton icon='heart' text={tweet.numberOfLikes} />
+            <IconButton icon='chart' text={tweet.impressions || 0} />
+            <IconButton icon='share-apple'/>
         </View>
         </View>
-    </View>
+    </Pressable>
+    </Link> 
   );
 }
 
@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
       footer: {
         flexDirection:"row",
         marginVertical:5,
+        justifyContent: "space-between",
       },
       textContent: {
         lineHeight: 20,
