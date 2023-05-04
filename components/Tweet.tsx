@@ -17,7 +17,7 @@ export default function Tweet({tweet}:TweetProps) {
       <View style={styles.usernameContainer}>
             <View style={{flexDirection: 'row'}}>
             <Text style={styles.name}>{tweet.user.name}</Text>
-            <Text style={styles.userName}>{tweet.user.username} &#183; 2h</Text>
+            <Text style={styles.userName}>@{tweet.user.username} &#183; 2h</Text>
             <Entypo name="dots-three-horizontal" size={16} color="gray" style={{marginLeft:"auto"}} />
         </View>       
         <Text style={styles.textContent}>{tweet.content}</Text>
